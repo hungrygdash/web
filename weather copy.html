@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Dashboard</title>
+
+<style>
+:root {
+    --primary: #4facfe;
+    --secondary: #00c6fb;
+    --card-bg: rgba(255,255,255,0.15);
+    --text: #ffffff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+    color:var(--text);
+    padding:20px;
+}
+
+.container{
+    max-width:900px;
+    width:100%;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:3rem;
+}
+
+.header p{
+    opacity:0.9;
+    margin-top:10px;
+}
+
+.weather-card{
+    background:var(--card-bg);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+.weather-icon{
+    font-size:80px;
+    margin-bottom:10px;
+    animation:float 3s ease-in-out infinite;
+}
+
+.temperature{
+    font-size:4rem;
+    font-weight:bold;
+}
+
+.city{
+    font-size:1.4rem;
+    margin:10px 0;
+}
+
+.weather-details{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.detail{
+    background:rgba(255,255,255,0.15);
+    padding:12px 20px;
+    border-radius:12px;
+}
+
+.forecast{
+    margin-top:30px;
+}
+
+.forecast h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.forecast-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
+    gap:15px;
+}
+
+.day-card{
+    background:var(--card-bg);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.day-card .icon{
+    font-size:35px;
+    margin:10px 0;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+@media(max-width:600px){
+    .header h1{
+        font-size:2rem;
+    }
+
+    .temperature{
+        font-size:3rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🌤 Weather Dashboard</h1>
+        <p>Check today's weather and plan your day better.</p>
+    </div>
+
+    <div class="weather-card">
+        <div class="weather-icon">⛅</div>
+
+        <div class="temperature">24°C</div>
+
+        <div class="city">Pittsburgh, PA</div>
+
+        <p>Partly Cloudy</p>
+
+        <div class="weather-details">
+            <div class="detail">💧 Humidity: 46%</div>
+            <div class="detail">🌬 Wind: 9 km/h</div>
+            <div class="detail">☀ Feels Like: 26°C</div>
+        </div>
+    </div>
+
+    <div class="forecast">
+        <h2>5-Day Forecast</h2>
+
+        <div class="forecast-grid">
+            <div class="day-card">
+                <h3>Sat</h3>
+                <div class="icon">☀</div>
+                <p>21°C</p>
+            </div>
+
+            <div class="day-card">
+                <h3>Sun</h3>
+                <div class="icon">☀</div>
+                <p>23°C</p>
+            </div>
+
+            <div class="day-card">
+                <h3>Mon</h3>
+                <div class="icon">⛅</div>
+                <p>23°C</p>
+            </div>
+
+            <div class="day-card">
+                <h3>Tue</h3>
+                <div class="icon">🌦</div>
+                <p>22°C</p>
+            </div>
+
+            <div class="day-card">
+                <h3>Wed</h3>
+                <div class="icon">☀</div>
+                <p>25°C</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
