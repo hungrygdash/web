@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: Arial;
+    padding: 20px;
+  }
+
+  .controls {
+    margin-bottom: 20px;
+  }
+
+  .grid {
+    display: grid;
+    gap: 10px;
+  }
+
+  .item {
+    background: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <label>
+    Columns:
+    <input type="range" id="cols" min="1" max="6" value="3">
+    <span id="value">3</span>
+  </label>
+</div>
+
+<div id="grid" class="grid"></div>
+
+<script>
+const grid = document.getElementById("grid");
+const cols = document.getElementById("cols");
+const value = document.getElementById("value");
+
+function render() {
+  const count = parseInt(cols.value);
+
+  value.textContent = count;
+  grid.style.gridTemplateColumns = `repeat(${count}, 1fr)`;
+
+  grid.innerHTML = "";
+
+  for (let i = 1; i <= 12; i++) {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.textContent = i;
+    grid.appendChild(div);
+  }
+}
+
+cols.addEventListener("input", render);
+render();
+</script>
+
+</body>
+</html>

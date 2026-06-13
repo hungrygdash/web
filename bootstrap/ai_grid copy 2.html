@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Column Adventure Game</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#87CEEB;
+    text-align:center;
+    margin:0;
+    padding:20px;
+}
+
+h1{
+    color:#222;
+}
+
+#controls{
+    background:white;
+    max-width:800px;
+    margin:auto;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+#world{
+    background:#f0f8ff;
+    max-width:900px;
+    margin:20px auto;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+#grid{
+    display:grid;
+    gap:10px;
+    margin-top:20px;
+}
+
+.tile{
+    background:#FFD54F;
+    border:3px solid #F9A825;
+    border-radius:10px;
+    padding:15px;
+    font-size:32px;
+    transition:.2s;
+}
+
+.tile:hover{
+    transform:scale(1.08);
+}
+
+button{
+    padding:10px 20px;
+    margin:5px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.plus{
+    background:#4CAF50;
+    color:white;
+}
+
+.minus{
+    background:#F44336;
+    color:white;
+}
+
+#message{
+    margin-top:20px;
+    font-size:22px;
+    font-weight:bold;
+    color:#333;
+}
+
+#score{
+    font-size:24px;
+    color:#1B5E20;
+}
+
+#goal{
+    font-size:20px;
+    margin-top:10px;
+}
+
+.success{
+    color:green;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🏆 Column Adventure</h1>
+
+<div id="controls">
+
+<h2>Help the Treasure Chests Find Their Shelves!</h2>
+
+<p>
+Columns = How many treasure chests fit in ONE row.
+</p>
+
+<button class="minus" onclick="changeColumns(-1)">⬅ Less Columns</button>
+<button class="plus" onclick="changeColumns(1)">More Columns ➡</button>
+
+<h2>Current Columns: <span id="columns">3</span></h2>
+
+<div id="goal"></div>
+<div id="score">Score: 0</div>
+
+<div id="message"></div>
+
+</div>
+
+<div id="world">
+<div id="grid"></div>
+</div>
+
+<script>
+
+let columns = 3;
+let score = 0;
+
+const grid = document.getElementById("grid");
+const message = document.getElementById("message");
+const goalText = document.getElementById("goal");
+
+let targetColumns = randomGoal();
+
+function randomGoal(){
+    return Math.floor(Math.random()*6)+1;
+}
+
+function changeColumns(amount){
+    columns += amount;
+
+    if(columns < 1) columns = 1;
+    if(columns > 6) columns = 6;
+
+    render();
+    checkGoal();
+}
+
+function checkGoal(){
+
+    if(columns === targetColumns){
+
+        score++;
+
+        document.getElementById("score").textContent =
+        "Score: " + score;
+
+        message.innerHTML =
+        "🎉 YOU DID IT! You made " +
+        targetColumns +
+        " columns!";
+
+        targetColumns = randomGoal();
+
+        updateGoal();
+
+    }else{
+
+        if(columns < targetColumns){
+            message.innerHTML =
+            "🤔 Need MORE columns.";
+        }else{
+            message.innerHTML =
+            "🤔 Need FEWER columns.";
+        }
+
+    }
+}
+
+function updateGoal(){
+
+    goalText.innerHTML =
+    "🎯 Mission: Make exactly <b>" +
+    targetColumns +
+    "</b> columns!";
+}
+
+function render(){
+
+    document.getElementById("columns").textContent =
+    columns;
+
+    grid.style.gridTemplateColumns =
+    `repeat(${columns}, 1fr)`;
+
+    grid.innerHTML = "";
+
+    for(let i=1;i<=12;i++){
+
+        const tile =
+        document.createElement("div");
+
+        tile.className = "tile";
+
+        const emojis =
+        ["💎","🏆","🦄","🚀","🍕","🐱","⚽","🎁","🐸","🌈","⭐","🦖"];
+
+        tile.textContent = emojis[i-1];
+
+        grid.appendChild(tile);
+    }
+
+}
+
+updateGoal();
+render();
+checkGoal();
+
+</script>
+
+</body>
+</html>
