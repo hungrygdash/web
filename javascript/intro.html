@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="myH"></h1>
+    <h2 id="myN"></h2>
+    <p id="myP"></p>
+    <div id="myI"></div>
+    <div id="myI2"></div>
+
+    <script>
+    // My heading:
+    const head=document.getElementById("myH");
+    head.innerHTML = "JavaScript Comments";
+    head.style.border="2px solid";
+    head.style.borderRadius="15px";
+    head.style.textAlign="center";
+
+    // My paragraph:
+    const para=document.getElementById("myP");
+    para.innerHTML = "This is my first paragraph";
+    para.style.border="2px solid";  
+    para.style.borderRadius="15px";
+    para.style.textAlign="center";
+
+    // My name:
+    const name=document.getElementById("myN");
+    name.innerHTML = "My name is Nicholas";
+    name.style.border="2px solid";
+    name.style.borderRadius="15px";
+    name.style.textAlign="center";
+
+    // My name color:
+    document.getElementById("myN").style.backgroundColor="red";
+
+    // My heading color:
+    document.getElementById("myH").style.backgroundColor="yellow";
+
+    // My paragraph color:
+    document.getElementById("myP").style.backgroundColor="blue";
+
+    // My paragraph bold:
+    document.getElementById("myP").style.fontWeight="bold";
+
+    // My image:
+    const img = document.createElement("img");
+    img.src="https://tse4.mm.bing.net/th/id/OIP.l6e5XjbspaceR1P5N9EBeQHaES?pid=Api&h=220&P=0";
+    img.border="10px solid";
+    img.style.borderRadius="15px"
+     document.getElementById("myI").appendChild(img);
+
+     // My second image:
+      const img2 = document.createElement("img");
+    img2.src="https://www.devstringx.com/wp-content/uploads/2023/01/BANNER-1536x768.jpg";
+    img2.width="380";
+    img2.border="10px solid";
+    img2.style.borderRadius="15px"
+     document.getElementById("myI2").appendChild(img2);
+
+    </script>
+</body>
+</html>
