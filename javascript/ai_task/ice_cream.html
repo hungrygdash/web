@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:aliceblue;
+    text-align:center;
+}
+
+#shop{
+    width:320px;
+    margin:auto;
+    border:2px solid deeppink;
+    background:white;
+    padding:15px;
+}
+
+.flavour{
+    border:1px solid deeppink;
+    margin:6px;
+    padding:8px;
+}
+
+button{
+    background:deeppink;
+    color:white;
+    padding:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Ice Cream Shop</h1>
+
+<div id="shop">
+
+<div class="flavour">
+Cup 1:
+<span id="cup1"></span>
+</div>
+
+<div class="flavour">
+Cup 2:
+<span id="cup2"></span>
+</div>
+
+<div class="flavour">
+Cup 3:
+<span id="cup3"></span>
+</div>
+
+<p>
+Orders:
+<span id="orders"></span>
+</p>
+
+</div>
+
+<br>
+
+<button onclick="openShop()">
+Open Shop
+</button>
+
+<p id="status"></p>
+
+<script>
+
+function openShop(){
+
+    // Fill the cups
+
+    document.getElementById("cup1").innerHTML = "Chocolate";
+
+    document.getElementById("cup2").innerHTML = "Vanilla";
+
+    // ✏ Fill in the blank
+    document.getElementById("cup3").innerHTML = "Strawberry";
+
+    // ✏ Fill in the blank
+    document.getElementById("orders").innerHTML = "3";
+
+    // Change the shop background colour
+
+    // ✏ Fill in the blank
+    document.getElementById("shop").style.backgroundColor = "blue";
+
+    // Change the heading colour
+
+    // Hint:
+    // document.querySelector("h1").style.color = "red";
+
+    // ✏ Fill in the blank
+    document.querySelector("h1").style.color = "blue";
+
+    document.getElementById("status").innerHTML =
+    "The ice cream shop is now open!";
+
+}
+
+</script>
+
+</body>
+</html>

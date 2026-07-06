@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body{
+    font-family:Arial;
+    background:aliceblue;
+    text-align:center;
+}
+
+#classroom{
+    width:300px;
+    margin:auto;
+    border:2px solid royalblue;
+    padding:15px;
+    background:white;
+}
+
+.student{
+    border:1px solid royalblue;
+    padding:8px;
+    margin:5px;
+}
+
+button{
+    padding:10px;
+    background:royalblue;
+    color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>My Classroom</h1>
+
+<div id="classroom">
+
+<div class="student">
+Student 1:
+<span id="student1"></span>
+</div>
+
+<div class="student">
+Student 2:
+<span id="student2"></span>
+</div>
+
+<div class="student">
+Student 3:
+<span id="student3"></span>
+</div>
+
+<p>Total Students:
+<span id="total"></span>
+</p>
+
+</div>
+
+<br>
+
+<button onclick="startClass()">
+Start Class
+</button>
+
+<p id="message"></p>
+
+<script>
+
+function startClass(){
+
+    // Store names inside variables
+    let firstStudent = "Olivia";
+    let secondStudent = "Noah";
+
+    // ✏ Fill in the blank
+    let thirdStudent = "James";
+
+    // Display students
+
+    document.getElementById("student1").innerHTML = firstStudent;
+
+    document.getElementById("student2").innerHTML = secondStudent;
+
+    // ✏ Fill in the blank
+    document.getElementById("student3").innerHTML = thirdStudent;
+
+    // ✏ Fill in the blank
+    document.getElementById("total").innerHTML = "3";
+
+    document.getElementById("message").innerHTML =
+    "Class has started!";
+
+}
+
+</script>
+
+</body>
+</html>

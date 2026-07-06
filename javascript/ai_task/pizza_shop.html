@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+body{
+    font-family: Arial;
+    background: aliceblue;
+    text-align: center;
+    padding:20px;
+}
+
+#shop{
+    width:320px;
+    margin:auto;
+    border:2px solid darkorange;
+    background:white;
+    padding:15px;
+    border-radius:10px;
+}
+
+.pizza{
+    border:1px solid darkorange;
+    margin:8px;
+    padding:10px;
+    text-align:left;
+}
+
+button{
+    background:darkorange;
+    color:white;
+    padding:10px;
+    border:none;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Nicholas's Pizza Shop</h1>
+
+<p>Use JavaScript to prepare today's pizza orders!</p>
+
+<div id="shop">
+
+<div class="pizza">
+Order 1:
+<span id="order1"></span>
+</div>
+
+<div class="pizza">
+Order 2:
+<span id="order2"></span>
+</div>
+
+<div class="pizza">
+Order 3:
+<span id="order3"></span>
+</div>
+
+<div class="pizza">
+Total Orders:
+<span id="total"></span>
+</div>
+
+</div>
+
+<br>
+
+<button onclick="openShop()">
+Open Pizza Shop
+</button>
+
+<p id="status"></p>
+
+<script>
+
+function openShop(){
+
+    // textContent changes only the text inside an element.
+
+    document.getElementById("order1").textContent = "Pepperoni";
+
+    document.getElementById("order2").textContent = "Hawaiian";
+
+    // ✏ Fill in the blank
+    document.getElementById("order3").textContent = "Cheese";
+
+    // ✏ Fill in the blank
+    document.getElementById("total").textContent = "3";
+
+    // Change the shop background colour
+
+    // ✏ Fill in the blank
+    document.getElementById("shop").style.backgroundColor = "#F5F5DC";
+
+    // Change the page heading colour
+
+    // ✏ Fill in the blank
+    document.querySelector("h1").style.color = "black";
+
+    // Display a message
+
+    // ✏ Fill in the blank
+    document.getElementById("status").textContent =
+    "thank you for ordering at Nicholas's Pizza Shop!";
+
+}
+
+</script>
+
+</body>
+</html>
