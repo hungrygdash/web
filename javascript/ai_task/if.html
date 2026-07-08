@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="score"></div>
+    <div id="container"></div>
+    <script>
+        let score=90;
+        let grade;
+        if (score >= 90) {
+            grade = "A+";
+        } else if (score >= 50) {
+            grade = "B+";
+        } else {
+            grade = "C+";
+        }
+        console.log(grade);
+        document.getElementById("score").innerHTML="The score is "+score;
+        document.getElementById("container").innerHTML="The grade is "+grade;
+    </script>
+</body>
+</html>
