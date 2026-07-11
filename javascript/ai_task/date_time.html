@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Current Year: </h3>
+    <p id="currentyear"></p>
+
+    <h3>Current Month: </h3>
+    <p id="currentmonth"></p>
+
+    <h3>Current Hour and Greeting: </h3>
+    <p id="currenthour"></p>
+    <script>
+        let hour = new Date().getHours();
+        let year = new Date().getFullYear();
+        let month = new Date().getMonth();
+
+        let greeting;
+        if (hour < 17) {
+            greeting = " Good Morning!";
+        } else if (hour < 17) {
+            greeting = " Good Afternoon!";
+        } else if (hour < 20) {
+            greeting = " Good Evening";
+        }
+        else {
+            greeting = "Good Night"
+        }
+
+        document.getElementById("currentyear").innerHTML = year;
+        document.getElementById("currenthour").innerHTML = hour+greeting;
+        document.getElementById("currentmonth").innerHTML = month;
+        
+    </script>
+</body>
+</html>
