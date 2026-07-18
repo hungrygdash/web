@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorting Visualizer</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#141E30,#243B55);
+    color:white;
+    overflow:hidden;
+}
+
+h1{
+    text-align:center;
+    margin:20px;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+button,input{
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+
+button{
+    cursor:pointer;
+    background:#00c9ff;
+    color:white;
+    transition:.3s;
+}
+
+button:hover{
+    background:#0096c7;
+    transform:scale(1.05);
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    height:70vh;
+    width:95%;
+    margin:auto;
+}
+
+.bar{
+    width:18px;
+    margin:0 2px;
+    border-radius:5px 5px 0 0;
+    transition:height .3s, background .3s;
+}
+
+.info{
+    text-align:center;
+    margin-top:15px;
+    font-size:20px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>📊 Bubble Sort Visualizer</h1>
+
+<div class="controls">
+    <button onclick="generateArray()">Generate Array</button>
+    <button onclick="bubbleSort()">Start Sorting</button>
+
+    <label>
+        Speed
+        <input type="range" id="speed" min="10" max="300" value="60">
+    </label>
+</div>
+
+<div class="container" id="container"></div>
+
+<div class="info">
+Comparisons:
+<span id="compare">0</span>
+|
+Swaps:
+<span id="swap">0</span>
+</div>
+
+<script>
+
+const container=document.getElementById("container");
+
+let values=[];
+
+function randomColor(height){
+    return `hsl(${height*3},80%,60%)`;
+}
+
+function generateArray(){
+
+values=[];
+container.innerHTML="";
+
+for(let i=0;i<35;i++){
+
+let value=Math.floor(Math.random()*300)+20;
+
+values.push(value);
+
+let bar=document.createElement("div");
+
+bar.classList.add("bar");
+bar.style.height=value+"px";
+bar.style.background=randomColor(value);
+
+container.appendChild(bar);
+
+}
+
+document.getElementById("compare").innerText=0;
+document.getElementById("swap").innerText=0;
+
+}
+
+function sleep(ms){
+return new Promise(resolve=>setTimeout(resolve,ms));
+}
+
+async function bubbleSort(){
+
+let bars=document.getElementsByClassName("bar");
+
+let comparisons=0;
+let swaps=0;
+
+let delay=300-document.getElementById("speed").value+10;
+
+for(let i=0;i<values.length;i++){
+
+    for(let j=0;j<values.length-i-1;j++){
+
+        bars[j].style.background="#ff006e";
+        bars[j+1].style.background="#ff006e";
+
+        comparisons++;
+        document.getElementById("compare").innerText=comparisons;
+
+        await sleep(delay);
+
+        if(values[j]>values[j+1]){
+
+            swaps++;
+            document.getElementById("swap").innerText=swaps;
+
+            [values[j],values[j+1]]=[values[j+1],values[j]];
+
+            bars[j].style.height=values[j]+"px";
+            bars[j+1].style.height=values[j+1]+"px";
+
+            bars[j].style.background=randomColor(values[j]);
+            bars[j+1].style.background=randomColor(values[j+1]);
+
+            await sleep(delay);
+        }
+
+        bars[j].style.background=randomColor(values[j]);
+        bars[j+1].style.background=randomColor(values[j+1]);
+
+    }
+
+    bars[values.length-i-1].style.background="#00ff95";
+
+}
+
+bars[0].style.background="#00ff95";
+
+}
+
+generateArray();
+
+</script>
+
+</body>
+</html>
