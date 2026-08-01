@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎵 DJ Playlist Adventure</title>
+
+<style>
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#6dd5ed,#2193b0);
+    margin:0;
+    padding:30px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    color:white;
+}
+
+.story{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+    font-size:20px;
+}
+
+.section{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:15px;
+    box-shadow:0 5px 12px rgba(0,0,0,.2);
+}
+
+.cards{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.card{
+    background:#ffeb3b;
+    padding:18px;
+    border-radius:12px;
+    font-size:22px;
+    min-width:120px;
+    text-align:center;
+    transition:.6s;
+    box-shadow:0 5px 10px rgba(0,0,0,.25);
+}
+
+.number{
+    background:#b2ff59;
+}
+
+button{
+    padding:12px 20px;
+    margin:5px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    color:white;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.blue{background:#2196f3;}
+.green{background:#4caf50;}
+.orange{background:#ff9800;}
+.red{background:#f44336;}
+.purple{background:#9c27b0;}
+
+.message{
+    margin-top:20px;
+    padding:15px;
+    background:#e3f2fd;
+    border-radius:10px;
+    font-size:20px;
+    min-height:60px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎧 DJ Playlist Adventure 🎧</h1>
+
+<div class="story">
+
+<h2>🎉 Story</h2>
+
+DJ Melody is getting ready for the School Dance!
+
+Help organize the songs by clicking the magic buttons.
+
+Every button teaches the computer a new trick called a <b>Function</b>.
+
+</div>
+
+<div class="section">
+
+<h2>🎵 Songs</h2>
+
+<button class="blue" onclick="sortAZ()">
+Sort A → Z
+</button>
+
+<button class="purple" onclick="sortZA()">
+Sort Z → A
+</button>
+
+<div id="songs" class="cards"></div>
+
+</div>
+
+<div class="section">
+
+<h2>❤️ Play Counts</h2>
+
+<button class="green" onclick="sortLeast()">
+Least Played
+</button>
+
+<button class="red" onclick="sortMost()">
+Most Played
+</button>
+
+<div id="plays" class="cards"></div>
+
+</div>
+
+<div class="section">
+
+<h2>🏷 Add Labels</h2>
+
+<button class="orange" onclick="addLabel()">
+Add "Plays"
+</button>
+
+<div id="labels" class="cards"></div>
+
+</div>
+
+<div class="section">
+
+<h2>📖 What Happened?</h2>
+
+<div id="message" class="message">
+Click any button to begin your adventure!
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let songs=[
+"Zoom",
+"Bounce",
+"Glow",
+"Rush",
+"Spark"
+];
+
+let plays=[
+320,
+85,
+210,
+50,
+175
+];
+
+function showSongs(){
+
+let html="";
+
+songs.forEach(song=>{
+
+html+=`
+<div class="card">
+🎵<br>${song}
+</div>
+`;
+
+});
+
+document.getElementById("songs").innerHTML=html;
+
+}
+
+function showPlays(){
+
+let html="";
+
+plays.forEach(play=>{
+
+html+=`
+<div class="card number">
+❤️<br>${play}
+</div>
+`;
+
+});
+
+document.getElementById("plays").innerHTML=html;
+
+}
+
+function showLabels(){
+
+let html="";
+
+plays.forEach(play=>{
+
+html+=`
+<div class="card number">
+🏷<br>${play} plays
+</div>
+`;
+
+});
+
+document.getElementById("labels").innerHTML=html;
+
+}
+
+function explain(text){
+
+document.getElementById("message").innerHTML=text;
+
+}
+
+showSongs();
+showPlays();
+
+function sortAZ(){
+
+songs.sort();
+
+showSongs();
+
+explain("📚 <b>sort()</b> arranged the song names like a dictionary. The alphabet always starts with A!");
+
+}
+
+function sortZA(){
+
+songs.sort();
+
+songs.reverse();
+
+showSongs();
+
+explain("🔄 First the songs were sorted A to Z, then <b>reverse()</b> flipped them backwards.");
+
+}
+
+function sortLeast(){
+
+plays.sort(function(a,b){
+
+return a-b;
+
+});
+
+showPlays();
+
+explain("🔢 The smallest number comes first. This helps us find the least played songs.");
+
+}
+
+function sortMost(){
+
+plays.sort(function(a,b){
+
+return b-a;
+
+});
+
+showPlays();
+
+explain("⭐ The biggest numbers come first. These are the most popular songs!");
+
+}
+
+function addLabel(){
+
+showLabels();
+
+explain("🏷 <b>map()</b> added the word <b>'plays'</b> beside every number. The numbers stayed the same, but each one received a label.");
+
+}
+
+</script>
+
+</body>
+</html>

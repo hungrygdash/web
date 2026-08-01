@@ -38,5 +38,34 @@
         </div>
 
     </div>
+    <script>
+        var songs = ["Zoom", "Bounce", "Glow", "Rush", "Spark"];
+        var plays = [320, 85, 210, 50, 175];
+
+        document.getElementById("nameResult").innerHTML = "Songs: " + songs;
+        document.getElementById("countResult").innerHTML = "Plays: " + plays;
+        document.getElementById("labelResult").innerHTML = "Press the button above!";
+
+        function sortAZ()   {
+            songs.sort();
+            document.getElementById("nameResult").innerHTML = "A to Z: " + songs;
+        }
+        function sortZA()   {
+            songs.sort(); songs.reverse();
+            document.getElementById("nameResult").innerHTML = "Z to A: " + songs;
+        }
+        function sortLeast()   {
+            plays.sort(function(a,b){return a-b});
+            document.getElementById("countResult").innerHTML = "Least played first: " + plays;
+        }
+        function sortMost()   {
+            plays.sort(function(a,b){return b-a});
+            document.getElementById("countResult").innerHTML = "Most played first: " + plays;
+        }
+        function sortAZ()   {
+            var l = plays.map(function(c){return c+" plays";});
+            document.getElementById("labelResult").innerHTML = "labelled: " + l;
+        }
+    </script>
 </body>
 </html>
