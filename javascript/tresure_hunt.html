@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Tresure Hunt Adventure</h1>
+
+    <button onclick="saveTresure()">Save Tresure Map</button>
+    <button onclick="startAdventure()">Start Adventure</button>
+
+    <div class="box">
+        JSON Text:
+        <span id="json"></span>
+    </div>
+
+    <div class="box">
+        Tresure:
+        <span id="tresure"></span>
+    </div>
+
+    <div class="box">
+        Value:
+        <span id="value"></span>
+    </div>
+
+    <div class="box">
+        Adventure Status:
+        <span id="status"></span>
+    </div>
+
+    <div class="box">
+        Result:
+        <span id="result"></span>
+    </div>
+
+    <script>
+
+        let tresureMap = {
+            tresure: "Golden Crown",
+            value: 500,
+            island: "Skull Island"
+        };
+
+        function saveTresure(){
+            return new Promise(function(resolve){
+                setTimeout(resolve, ms);
+            });
+        }
+
+        async fuction startAdventure(){
+
+            document.getElementById("result").innerHTML="";
+
+            document.getElementById("status").innerHTML="Reading the tresure map...";
+
+            setTimeout(function(){
+                document.getElementById("status").innerHTML="Sailing to the island...";
+            },1000);
+
+            await delay(3000);
+
+            document.getElementById("status")
+        }
+    </script>
+</body>
+</html>

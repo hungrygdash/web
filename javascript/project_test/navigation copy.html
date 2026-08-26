@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore The Universe</title>
+
+    <!-- Bootstrap -->
+    <link 
+        rel="stylesheet" 
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+
+    <style>
+        /* The page */
+        body {
+            background: #080b1a;
+            color: white;
+        }
+
+        /* Navigation */
+        .navigation {
+            background: #11152b;
+        }
+
+        .nav-link {
+            color: white;
+        }
+
+        .nav-link:hover {
+            color: #8ab4ff;
+        }
+
+        /* Space section */
+        .space-section {
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        /* The box containing the images */
+        .space-images {
+            background: #1e213a;
+            border-radius: 10px;
+            padding: 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 15px;
+
+            /* This prevents the box from causing horizontal overflow */
+            max-width: 100%;
+        }
+
+        /* The important part! */
+        .space-images img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+
+            /* Don't let the images become too huge */
+            width: 100%;
+        }
+
+        /* On smaller screens, put the images on top of each other */
+        @media (max-width: 768px) {
+            .space-images {
+                flex-direction: column;
+            }
+
+            .space-images img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <div class="container-fluid navigation pt-3">
+        <div class="row">
+            <ul class="nav nav-links justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="#Space">Space</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#Planets">Planets</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#Stars">Stars</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#Moon">Moon</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- Main content -->
+    <main>
+
+        <section id="Space" class="container space-section">
+
+            <div class="row align-items-center">
+
+                <!-- Text -->
+                <div class="col-md-6">
+
+                    <h1 class="display-4 font-weight-bold">
+                        Explore The Universe
+                    </h1>
+
+                    <p class="lead">
+                        Space is vast, full of mysteries, and waiting to be discovered.
+                        Dive into the cosmos.
+                    </p>
+
+                    <button class="btn btn-outline-light btn-lg">
+                        Learn More
+                    </button>
+
+                </div>
+
+
+                <!-- Images -->
+                <div class="col-md-6 text-center">
+
+                    <div class="space-images">
+
+                        <img 
+                            src="https://img.freepik.com/free-photo/glowing-spaceship-orbits-planet-starry-galaxy-generated-by-ai_188544-9655.jpg?w=2000"
+                            alt="Spaceship orbiting a planet"
+                        >
+
+                        <img 
+                            src="https://cdn.pixabay.com/photo/2023/08/11/17/24/ai-generated-8184041_1280.png"
+                            alt="Space scene"
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

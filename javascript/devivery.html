@@ -33,10 +33,10 @@
 </head>
 <body>
     <h1>My Delivery Tracker</h1>
-    <button oncklick="saveOrder()">Save Order</button>
-    <button oncklick="startDelivery()">Start Delivery</button>
+    <button onclick="saveOrder()">Save Order</button>
+    <button onclick="startDelivery()">Start Delivery</button>
 
-    <div>JSON Text: <span id="json-text></span></div>
+    <div>JSON Text: <span id="json-text"></span></div>
     <div>Loaded Item: <span id="loaded-item"></span></div>
     <div>Loaded Price: <span id="loaded-price"></span></div>
     <div>Status: <span id="status"></span></div>
@@ -58,8 +58,9 @@
           document.getElementById("loaded-price").innerHTML = "$" + loadedOrder.price;
         }
 
-        function delay(ms) {
+       function delay(ms) {
             return new Promise(function(resolve) {
+                setTimeout(resolve, ms);
             });
         }
 
