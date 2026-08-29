@@ -2,10 +2,21 @@
 <html lang="en">
 <head>
     <style>
+        .space-images {
+            display: flex;
+            justify-content: center;
+            gap: 15px;            
+        }
+
         .space-images img {
             max-width: 100%;
             height: auto;
             border-radius: 10px;
+        }
+
+         nav {
+            display: flex;
+            justify-content: center;
         }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -14,8 +25,8 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container-fluid navigation pt-3">
-        <div class="row">
+    <nav>
+        <div class="container-fluid navigation pt-3">
             <ul class="nav nav-links justify-content-center">
                 <li class="nav-item"><a class="nav-link" href="#Space">Space</a></li>
                 <li class="nav-item"><a class="nav-link" href="#Planets">Planets</a></li>
@@ -23,13 +34,13 @@
                 <li class="nav-item"><a class="nav-link" href="#Moon">Moon</a></li>
             </ul> 
         </div>
-    </div>
+    </nav>
 
     <main>
 
         <section id="Space" class="container space-section">
             <div class="row align-items-center">
-                <div class="col-md-6">
+                <div>
                     <h1 class="display-4 font-weight-bold">Explore The Universe</h1>
                     <p class="lead">Space is vast, full of mysteries, and waiting to be discovered. Dive into the cosmos.</p>
                     <button class="btn btn-outline-light btn-lg">Learn More</button>
