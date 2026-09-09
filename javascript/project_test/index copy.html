@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore The Universe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #0a0c1f;
+            --bg-panel: #12142e;
+            --accent-nebula: #8c6ff7;
+            --accent-glow: #4fd1c5;
+            --text-light: #f4f3ff;
+            --text-dim: #9198c4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-deep);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* STAR BACKGROUND */
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+
+            background: linear-gradient(
+                to bottom,
+                rgba(10,12,31,0.95),
+                rgba(10,12,31,0.6)
+            );
+
+            backdrop-filter: blur(6px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 36px;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.25s ease;
+        }
+
+        nav a::before {
+            content: '·';
+            color: var(--accent-glow);
+            margin-right: 6px;
+        }
+
+        nav a:hover {
+            color: var(--text-light);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .space-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 24px 60px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 48px;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        /* LEFT SIDE */
+        .eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--accent-glow);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            line-height: 1.08;
+            margin-bottom: 20px;
+
+            background: linear-gradient(
+                135deg,
+                #ffffff 40%,
+                var(--accent-nebula) 100%
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 32px;
+            max-width: 420px;
+        }
+
+        /* LEARN MORE BUTTON */
+        .btn-explore {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+
+            color: var(--bg-deep);
+            background: var(--accent-glow);
+
+            border: none;
+            padding: 14px 30px;
+            border-radius: 999px;
+
+            cursor: pointer;
+
+            box-shadow: 0 0 24px rgba(79, 209, 197, 0.4);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .btn-explore:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 32px rgba(79, 209, 197, 0.6);
+        }
+
+        .btn-explore:focus-visible {
+            outline: 2px solid var(--text-light);
+            outline-offset: 3px;
+        }
+
+        /* =========================
+           IMAGE SLIDER
+           ========================= */
+
+        .gallery {
+            width: 100%;
+        }
+
+        /*
+            This is the "window".
+
+            Only one image is visible at a time.
+        */
+        .gallery-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        /*
+            All images are placed next to each other.
+        */
+        .gallery-slider {
+            display: flex;
+
+            /*
+                This creates the smooth sliding animation.
+            */
+            transition: transform 0.5s ease;
+        }
+
+        /*
+            Each frame takes up 100% of the gallery width.
+        */
+        .frame {
+            position: relative;
+
+            min-width: 100%;
+
+            border-radius: 16px;
+            overflow: hidden;
+
+            border: 1px solid rgba(140, 111, 247, 0.25);
+
+            background: var(--bg-panel);
+
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* IMAGE LABEL */
+        .frame-label {
+            position: absolute;
+
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            padding: 10px 14px;
+
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+
+            color: var(--text-light);
+
+            background: linear-gradient(
+                to top,
+                rgba(10,12,31,0.9),
+                transparent
+            );
+
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .frame-label span:last-child {
+            color: var(--accent-glow);
+        }
+
+        /* =========================
+           SLIDER CONTROLS
+           ========================= */
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+
+            margin-top: 18px;
+        }
+
+        .slider-button {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(140, 111, 247, 0.5);
+
+            background: var(--bg-panel);
+            color: var(--text-light);
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .slider-button:hover {
+            background: var(--accent-nebula);
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 0 20px rgba(140, 111, 247, 0.5);
+        }
+
+        .slider-button:focus-visible {
+            outline: 2px solid var(--accent-glow);
+            outline-offset: 3px;
+        }
+
+        /*
+            Shows:
+
+            01 / 04
+            02 / 04
+            etc.
+        */
+        .slide-counter {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .slide-counter .current {
+            color: var(--accent-glow);
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+
+            .space-section {
+                grid-template-columns: 1fr;
+
+                padding-top: 48px;
+
+                text-align: left;
+            }
+
+            nav ul {
+                gap: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 0 16px;
+            }
+        }
+
+        /* REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+
+            #stars {
+                display: none;
+            }
+
+            .gallery-slider {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- STAR BACKGROUND -->
+    <canvas id="stars"></canvas>
+
+
+    <!-- NAVIGATION -->
+    <nav>
+        <ul>
+            <li><a href="#Space">Space</a></li>
+            <li><a href="#Planets">Planets</a></li>
+            <li><a href="#Stars">Stars</a></li>
+            <li><a href="#Moon">Moon</a></li>
+        </ul>
+    </nav>
+
+
+    <main>
+
+        <section id="Space" class="space-section">
+
+            <!-- =========================
+                 LEFT SIDE
+                 ========================= -->
+
+            <div>
+
+                <span class="eyebrow">
+                    Mission log · 519
+                </span>
+
+                <h1>
+                    Explore The Universe
+                </h1>
+
+                <p class="lead">
+                    Space is vast, full of mysteries, and waiting to be
+                    discovered. Dive into the cosmos.
+                </p>
+
+                <button class="btn-explore">
+                    Learn More
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 RIGHT SIDE - IMAGE SLIDER
+                 ========================= -->
+
+            <div class="gallery">
+
+                <!-- Slider window -->
+                <div class="gallery-container">
+
+                    <!-- Slider -->
+                    <div class="gallery-slider">
+
+
+                        <!-- IMAGE 1 -->
+                        <div class="frame">
+
+                            <img
+                                src="https://img.freepik.com/free-photo/glowing-spaceship-orbits-planet-starry-galaxy-generated-by-ai_188544-9655.jpg?w=2000"
+                                alt="A glowing spaceship orbiting a planet in a starry galaxy"
+                            >
+
+                            <div class="frame-label">
+                                <span>FRAME 01</span>
+                                <span>ORBIT.LOCK</span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- IMAGE 2 -->
+                        <div class="frame">
+
+                            <img
+                                src="https://cdn.pixabay.com/photo/2023/08/11/17/24/ai-generated-8184041_1280.png"
+                                alt="AI generated deep space scene"
+                            >
+
+                            <div class="frame-label">
+                                <span>FRAME 02</span>
+                                <span>DEEP.FIELD</span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- IMAGE 3 -->
+                        <div class="frame">
+
+                            <img
+                                src="https://img.freepik.com/free-photo/glowing-spaceship-orbits-planet-starry-galaxy-generated-by-ai_188544-9655.jpg?w=2000"
+                                alt="A glowing spaceship orbiting a planet"
+                            >
+
+                            <div class="frame-label">
+                                <span>FRAME 03</span>
+                                <span>ORBIT.LOCK</span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- IMAGE 4 -->
+                        <div class="frame">
+
+                            <img
+                                src="https://cdn.pixabay.com/photo/2023/08/11/17/24/ai-generated-8184041_1280.png"
+                                alt="AI generated deep space scene"
+                            >
+
+                            <div class="frame-label">
+                                <span>FRAME 04</span>
+                                <span>DEEP.FIELD</span>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <!-- =========================
+                     SLIDER BUTTONS
+                     ========================= -->
+
+                <div class="slider-controls">
+
+                    <button
+                        class="slider-button"
+                        id="previousButton"
+                        aria-label="Previous image"
+                    >
+                        ←
+                    </button>
+
+
+                    <div class="slide-counter">
+                        <span class="current" id="currentSlide">
+                            01
+                        </span>
+
+                        /
+
+                        <span id="totalSlides">
+                            04
+                        </span>
+                    </div>
+
+
+                    <button
+                        class="slider-button"
+                        id="nextButton"
+                        aria-label="Next image"
+                    >
+                        →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /* =========================================
+           IMAGE SLIDER
+           ========================================= */
+
+        const slider = document.querySelector(".gallery-slider");
+
+        const slides = document.querySelectorAll(".frame");
+
+        const previousButton =
+            document.getElementById("previousButton");
+
+        const nextButton =
+            document.getElementById("nextButton");
+
+        const currentSlide =
+            document.getElementById("currentSlide");
+
+        const totalSlides =
+            document.getElementById("totalSlides");
+
+
+        /*
+            Start at the first image.
+        */
+        let currentImage = 0;
+
+
+        /*
+            Automatically count how many images
+            we have.
+        */
+        const totalImages = slides.length;
+
+
+        /*
+            Show total number of images.
+        */
+        totalSlides.textContent =
+            String(totalImages).padStart(2, "0");
+
+
+        /*
+            This function moves the slider.
+        */
+        function showImage(index) {
+
+            /*
+                Move the slider to the left.
+
+                Example:
+
+                Image 1 = 0%
+                Image 2 = -100%
+                Image 3 = -200%
+                Image 4 = -300%
+            */
+            slider.style.transform =
+                `translateX(-${index * 100}%)`;
+
+
+            /*
+                Update the number underneath
+                the image.
+            */
+            currentSlide.textContent =
+                String(index + 1).padStart(2, "0");
+        }
+
+
+        /*
+            NEXT BUTTON
+        */
+        nextButton.addEventListener("click", function () {
+
+            currentImage++;
+
+            /*
+                If we're at the last image,
+                go back to the first image.
+            */
+            if (currentImage >= totalImages) {
+                currentImage = 0;
+            }
+
+            showImage(currentImage);
+        });
+
+
+        /*
+            PREVIOUS BUTTON
+        */
+        previousButton.addEventListener("click", function () {
+
+            currentImage--;
+
+            /*
+                If we're before the first image,
+                go to the last image.
+            */
+            if (currentImage < 0) {
+                currentImage = totalImages - 1;
+            }
+
+            showImage(currentImage);
+        });
+
+
+        /* =========================================
+           STARFIELD
+           ========================================= */
+
+        const canvas = document.getElementById("stars");
+
+        const ctx = canvas.getContext("2d");
+
+        let stars = [];
+
+
+        function resize() {
+
+            canvas.width = window.innerWidth;
+
+            canvas.height = document.body.scrollHeight;
+        }
+
+
+        function makeStars() {
+
+            stars = [];
+
+            const count =
+                Math.floor(
+                    (canvas.width * canvas.height) / 9000
+                );
+
+
+            for (let i = 0; i < count; i++) {
+
+                stars.push({
+
+                    x: Math.random() * canvas.width,
+
+                    y: Math.random() * canvas.height,
+
+                    r: Math.random() * 1.4 + 0.3,
+
+                    a: Math.random(),
+
+                    speed:
+                        Math.random() * 0.015 + 0.005
+
+                });
+
+            }
+        }
+
+
+        function draw() {
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            for (const s of stars) {
+
+                s.a += s.speed;
+
+
+                const opacity =
+                    (Math.sin(s.a) + 1) / 2;
+
+
+                ctx.beginPath();
+
+
+                ctx.arc(
+                    s.x,
+                    s.y,
+                    s.r,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                ctx.fillStyle =
+                    `rgba(244, 243, 255, ${0.2 + opacity * 0.8})`;
+
+
+                ctx.fill();
+            }
+
+
+            requestAnimationFrame(draw);
+        }
+
+
+        const prefersReduced =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+
+        resize();
+
+        makeStars();
+
+
+        if (!prefersReduced) {
+            draw();
+        }
+
+
+        window.addEventListener("resize", () => {
+
+            resize();
+
+            makeStars();
+
+        });
+
+    </script>
+
+</body>
+</html>

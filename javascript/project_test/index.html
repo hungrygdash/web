@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .space-images-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .space-images {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .space-images span {
+            min-width: 100%;
+            text-align: center;
+        }
+
+        .space-images img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Space Explorer</title>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container-fluid navigation pt-3">
+            <ul class="nav nav-links justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="#Space">Space</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#Planets">Planets</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#Stars">Stars</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#Moon">Moon</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <main>
+
+        <section id="Space" class="container space-section">
+
+            <div class="row align-items-center">
+
+                <div>
+                    <h1 class="display-4 font-weight-bold">
+                        Explore The Universe
+                    </h1>
+
+                    <p class="lead">
+                        Space is vast, full of mysteries, and waiting to be discovered.
+                        Dive into the cosmos.
+                    </p>
+
+                    <button class="btn btn-outline-light btn-lg">
+                        Learn More
+                    </button>
+                </div>
+
+
+                <div class="col-md-6 text-center">
+
+                    <!-- Image Slider -->
+                    <div class="space-images-container">
+
+                        <div class="space-images">
+
+                            <span>
+                                <img src="https://img.freepik.com/free-photo/glowing-spaceship-orbits-planet-starry-galaxy-generated-by-ai_188544-9655.jpg?w=2000">
+                            </span>
+
+                            <span>
+                                <img src="https://cdn.pixabay.com/photo/2023/08/11/17/24/ai-generated-8184041_1280.png">
+                            </span>
+
+                            <span>
+                                <img src="http://1.bp.blogspot.com/_EAViqbzwc_s/TONjyfBQXGI/AAAAAAAACMI/1mJ9XAh_nyE/s1600/12.jpg">
+                            </span>
+
+                            <span>
+                                <img src="https://i.pinimg.com/originals/fa/d6/8e/fad68e908ab78f0524643e5247aa2bba.jpg">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Slider Buttons -->
+                    <div class="mt-3">
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="previousImage()">
+                            ←
+                        </button>
+
+                        <button
+                            class="btn btn-primary"
+                            onclick="nextImage()">
+                            →
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        let currentImage = 0;
+
+        function nextImage() {
+
+            currentImage++;
+
+            // We currently have 2 images
+            if (currentImage >= 4) {
+                currentImage = 0;
+            }
+
+            document.querySelector(".space-images").style.transform =
+                `translateX(-${currentImage * 100}%)`;
+        }
+
+
+        function previousImage() {
+
+            currentImage--;
+
+            if (currentImage < 0) {
+                currentImage = 1;
+            }
+
+            document.querySelector(".space-images").style.transform =
+                `translateX(-${currentImage * 100}%)`;
+        }
+
+    </script>
+
+</body>
+</html>
