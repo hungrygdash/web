@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .picture-window{
+            overflow: hidden;
+            width: 400px;
+            height: 200px;
+            margin: auto;
+            position: relative;
+        }
+
+        .picture-train{
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .picture-train img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        button{
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: black;
+            background-color: lightgray;
+            padding: 20px;
+            border: 5px solid darkgray;
+        }
+
+        .next-button{
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="picture-window">
+        <div class="picture-train">
+            <img src="https://cdn.creazilla.com/icons/3204989/logo-javascript-icon-md.png">
+            <img src="https://cdn.pixabay.com/photo/2024/01/31/04/37/javascript-8543231_1280.png">
+            <img src="https://static.vecteezy.com/system/resources/previews/027/127/463/original/javascript-logo-javascript-icon-transparent-free-png.png">
+        </div> 
+        <button class="prev-button" onclick="goBack()">Prevous</button>    
+        <button class="next-button" onclick="goForward()">Next</button>  
+    </div>
+    <script>
+        const train = document.querySelector(".picture-train");
+        let currentPictureNumber = 0;
+        function goForward() {
+            if (currentPictureNumber < 2) {
+                currentPictureNumber = currentPictureNumber +1;
+            } else {
+                currentPictureNumber = 0;
+            }
+            moveTheTrain()
+        }
+
+        function goBack() {
+            if (currentPictureNumber > 0) {
+                currentPictureNumber = currentPictureNumber -1;
+            } else {
+                currentPictureNumber = 2;
+            }
+            moveTheTrain()
+        }
+
+        function moveTheTrain() {
+            train.style.transform = "translateX(-" + (currentPictureNumber *100) +"%)";
+        }
+    </script>
+</body>
+</html>
