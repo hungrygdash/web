@@ -1,18 +1,17 @@
 #calculator {
     display: grid;
-    grid-template-columns: repeat(3, 60px);
+    grid-template-columns: repeat(0, 60px);
     gap: 8px;
-    width: max-content;
     margin: 50px auto;
     padding: 16px;
-    background: #222;
+    background: #606060;
     border-radius: 10px;
 }
 
 #display {
-    grid-column: span 3;
-    background: #111;
-    color: #fff;
+    grid-column: span 4;
+    background: #1b1b1b;
+    color: #ffffff;
     font-size: 24px;
     text-align: right;
     padding: 12px;
@@ -26,11 +25,25 @@
     font-size: 18px;
     border: none;
     border-radius: 6px;
-    background: #444;
-    color: #fff;
+    background: #1b1b1b;
+    color: #ffffff;
     cursor: pointer;
 }
 
 .btn:hover {
-    background: #666;
+    background: #4c4c4c;
+}
+
+.btn_ac {
+ height: 50px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    background: #1b1b1b;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.btn_ac:hover {
+ background: #4c4c4c;
 }
