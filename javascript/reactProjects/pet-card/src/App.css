@@ -1,0 +1,8 @@
+.pets { display: flex; gap: 16px; justify-content: center; }
+.pet-card {
+  background: #e8f4ff;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  font-family: sans-serif;
+}
